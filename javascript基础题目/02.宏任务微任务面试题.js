@@ -1,3 +1,22 @@
+// 同步代码 → 微任务 → 宏任务
+
+// 微任务包括：
+
+// Promise 的 .then()、.catch()、.finally()
+
+// queueMicrotask()
+
+// MutationObserver
+
+// 宏任务包括：
+
+// setTimeout、setInterval
+
+// I/O 操作
+
+// UI 渲染
+
+setImmediate (Node.js)
 // console.log("script start");
 // let promise1 = new Promise(function (resolve) {
 // 	console.log("promise1");
@@ -19,11 +38,11 @@ setTimeout(() => {
 	console.log("1");
 
 	new Promise((resolve) => {
-		console.log("2");
+		console.log("2");//同步任务
 
 		resolve();
 	}).then(() => {
-		console.log("3");
+		console.log("3");//微任务
 	});
 
 	new Promise((ressolve, reject) => {

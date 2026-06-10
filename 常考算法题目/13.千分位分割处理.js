@@ -3,10 +3,10 @@
 function formatNumber(num) {
   const str = num.toString();
 
-  // 判断是否为负数
+  // 判断是否为负数 true/false
   const isNegative = str.startsWith('-');
 
-  // 去掉负号后再处理
+  // 去掉负号后再处理-这里的 integer 表示“整数部分”，decimal 表示“小数部分”。
   const [integer, decimal] = (isNegative ? str.slice(1) : str).split('.');
 
   // 从后往前每三位分组

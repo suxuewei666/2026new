@@ -1,3 +1,4 @@
+// 参考深拷贝.png
 function deepClone(obj) {
   // 处理 null 或 原始类型
   if (obj === null || typeof obj !== 'object') {

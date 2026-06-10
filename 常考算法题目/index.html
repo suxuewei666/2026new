@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // 输入
+  const list = [
+    { id: 3, node: 'node3', parentId: 2 },
+    { id: 2, node: 'node1', parentId: 1 },
+    { id: 1, node: 'root', parentId: 0 },
+    { id: 4, node: 'node4', parentId: 2 },
+    { id: 5, node: 'node5', parentId: 1 },
+    { id: 6, node: 'node6', parentId: 3 },
+    { id: 7, node: 'node7', parentId: 2 }
+  ];
+
+  function arrayToTree(list) {
+    const map = {};
+    const result = [];
+
+    for (const item of list) {
+      map[item.id] = { ...item, children: [] };
+    }
+    console.log(map, 1, map[7]);
+    for (const item of list) {
+      const parent = map[item.parentId];
+      console.log(parent, 'parent');
+      if (parent) {
+        // console.log( 'map[item.id]');
+        parent.children.push(map[item.id]);
+      } else {
+        result.push(map[item.id]);
+        // console.log(result, 'root');
+      }
+    }
+    console.log(result, 2);
+    return result;
+  }
+
+  const res = arrayToTree(list);
+  // console.log(JSON.stringify(res));
+
+  // 千分位分割处理
+
+  function formatNumber(num) {
+    const str = num.toString();
+
+    // 判断是否为负数
+    const isNegative = str.startsWith('-');
+
+    // 分割整数和小数部分
+    const [integer, decimal] = (isNegative ? str.slice(1) : str).split('.');
+    console.log(999, integer, decimal);
+
+    // 从后往前每三位分组
+    const arr = [];
+    for (let i = integer.length; i > 0; i -= 3) {
+      arr.unshift(integer.slice(Math.max(i - 3, 0), i));
+    }
+
+    // 拼接结果
+    const formattedInt = arr.join(',');
+
+    // 加回负号和小数部分
+    return (
+      (isNegative ? '-' : '') +
+      (decimal ? `${formattedInt}.${decimal}` : formattedInt)
+    );
+  }
+
+  console.log(formatNumber(123456)); // 123
+</script>
